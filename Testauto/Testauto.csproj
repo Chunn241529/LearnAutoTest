@@ -202,7 +202,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="SeleniumDemo.cs" />
+=======
+    <Compile Include="Test\SeleniumDemo.cs" />
+>>>>>>> Trung
     <Compile Include="Test\TestLogin.cs" />
   </ItemGroup>
   <ItemGroup>

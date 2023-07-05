@@ -11,6 +11,7 @@ namespace Testauto
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             var wbook = new XLWorkbook();
 
             var ws = wbook.Worksheets.Add("Sheet1");
@@ -42,6 +43,10 @@ namespace Testauto
             words.ForEach(Console.WriteLine);
 
             wbook.SaveAs(@"D:\trung\usedcells.xlsx");
+=======
+            
+           
+>>>>>>> Trung
         }
 
 

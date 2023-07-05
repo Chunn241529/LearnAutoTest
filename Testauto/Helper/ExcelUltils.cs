@@ -2,14 +2,24 @@
 using ClosedXML.Excel;
 using System.IO;
 using OpenQA.Selenium;
+<<<<<<< HEAD
+=======
+using OpenQA.Selenium.Chrome;
+>>>>>>> Trung
 
 namespace Testauto.Ultils
 {
     public class ExcelUltils
     {
+<<<<<<< HEAD
         public static string CHROME_DRIVER_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test-resources/Driver/chromedriver.exe");
         public static string DATA_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test-resources/Data/");
         public static string IMG_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test-resources/Img/");
+=======
+        public static string CHROME_DRIVER_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
+        public static string DATA_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/test-resources/Data/");
+        public static string IMG_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/test-resources/Img/");
+>>>>>>> Trung
 
 
         public static XLWorkbook GetWorkbook(string filePath)
@@ -61,7 +71,11 @@ namespace Testauto.Ultils
         }
 
         // Chụp ảnh
+<<<<<<< HEAD
         public static void TakeScreenshot(WebDriver driver, string outputSrc)
+=======
+        public static void TakeScreenshot(IWebDriver driver, string outputSrc)
+>>>>>>> Trung
         {
             var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
             screenshot.SaveAsFile(outputSrc, ScreenshotImageFormat.Png);
