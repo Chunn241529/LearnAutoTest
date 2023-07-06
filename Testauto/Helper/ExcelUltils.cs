@@ -2,15 +2,14 @@
 using ClosedXML.Excel;
 using System.IO;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Testauto.Ultils
 {
     public class ExcelUltils
     {
         public static string CHROME_DRIVER_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
-        public static string DATA_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/test-resources/Data/");
-        public static string IMG_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/test-resources/Img/");
+        public static string DATA_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test-resources", "Data");
+        public static string IMG_SRC = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test-resources", "Img");
 
 
         public static XLWorkbook GetWorkbook(string filePath)
@@ -62,9 +61,11 @@ namespace Testauto.Ultils
         }
 
         // Chụp ảnh
-        public static void TakeScreenshot(IWebDriver driver, string outputSrc)
+        public static void TakeScreenshot(IWebDriver driver, String outputSrc)
         {
-            var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+            Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+
+            // Save the screenshot to a file (replace "ScreenshotPath" with the desired path and file name)
             screenshot.SaveAsFile(outputSrc, ScreenshotImageFormat.Png);
         }
 

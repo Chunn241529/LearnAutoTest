@@ -23,18 +23,16 @@ namespace Testauto.Test
         public void Init()
         {
             ChromeOptions options = new ChromeOptions();
-            options.AddArgument("--headless"); // Optional, if you want the browser to be invisible
-
-            ChromeDriverService service = ChromeDriverService.CreateDefaultService();
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://mobile-builder.laki.dev/login");
-
+            options.AddArgument("--start-maximized");
             logs = new HashSet<LoginData>();
         }
 
         [SetUp]
         public void SetUp()
         {
+            // Set up WebDriver only
+            driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://mobile-builder.laki.dev/login");
             data = new LoginData();
         }
 
@@ -64,34 +62,33 @@ namespace Testauto.Test
         }
 
         [TearDown]
-public void TearDown()
-{
-    var result = TestContext.CurrentContext.Test;
-    data.TestMethod = result.MethodName;
+        public void TearDown(ITestResult result)
+        {
+             
+            data.TestMethod = result.Name;
 
-    switch (result.Result.Outcome.Status)
-    {
-        case TestStatus.Passed:
-            data.Status = "PASS";
-            break;
-        case TestStatus.Failed:
-            data.Status = "FAILURE";
-            data.Exception = result.Message;
+            switch (result.ResultState.Status)
+            {
+                case TestStatus.Passed:
+                    data.Status = "PASS";
+                    break;
+                case TestStatus.Failed:
+                    data.Status = "FAILURE";
+                    data.Exception = result.Message;
 
-            string path = Path.Combine(ExcelUltils.IMG_SRC, "failure-" + DateTimeOffset.Now.ToUnixTimeMilliseconds() + ".png");
-            ExcelUltils.TakeScreenshot(driver, path);
-            data.Image = path;
-            break;
-        case TestStatus.Skipped:
-            data.Status = "SKIP";
-            break;
-        default:
-            break;
-    }
-    logs.Add(data);
-    driver.Close();
-    driver.Quit();
-}
+                    String path = Path.Combine(ExcelUltils.IMG_SRC, "failure-" + DateTimeOffset.Now.ToUnixTimeMilliseconds() + ".png");
+                    ExcelUltils.TakeScreenshot(driver, path);
+                    data.Image = path;
+                    break;
+                case TestStatus.Skipped:
+                    data.Status = "SKIP";
+                    break;
+                default:
+                    break;
+            }
+            logs.Add(data);
+            driver.Quit();
+        }
 
 
         [OneTimeTearDown]
